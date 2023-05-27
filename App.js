@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer } from "@react-navigation/native";
+import LoginScreen from "./screens/loginScreen/LoginScreen";
+import RegisterScreen from "./screens/registerScreen/RegisterScreen";
+
+const Stack = createNativeStackNavigator();
+
+const globalScreenOptions = {
+    headerStyle: { backgroundColor: "#2C6BED" },
+    headerTitleStyle: { color: "white" },
+    headerTintColor: "white",
+};
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    return (
+        <NavigationContainer initialRouteName="Home">
+            <Stack.Navigator screenOptions={globalScreenOptions}>
+                <Stack.Screen
+                    name="login"
+                    component={LoginScreen}
+                    options={{
+                        title: "Welcome back to Signal!",
+                    }}
+                />
+                <Stack.Screen
+                    name="register"
+                    component={RegisterScreen}
+                    options={{
+                        title: "Create a new account",
+                        headerBackTitle: "Back to Login",
+                    }}
+                />
+            </Stack.Navigator>
+        </NavigationContainer>
+    );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
