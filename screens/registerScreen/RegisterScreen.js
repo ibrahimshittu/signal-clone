@@ -9,8 +9,8 @@ import {
 import { useLayoutEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import styles from "./RegisterScreen.style";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase";
-import { createUserWithEmailAndPassword, getAuth } from "firebase/auth";
 
 const RegisterScreen = ({ navigation }) => {
     const [registerDetails, setRegisterDetails] = useState({
@@ -19,8 +19,6 @@ const RegisterScreen = ({ navigation }) => {
         password: "",
         profilePicUrl: "",
     });
-
-    const auth = getAuth();
 
     const register = () => {
         createUserWithEmailAndPassword(auth, registerDetails.email, registerDetails.password)
@@ -31,11 +29,15 @@ const RegisterScreen = ({ navigation }) => {
                     displayName: registerDetails.fullName,
                     photoURL: registerDetails.profilePicUrl || "https://i.imgur.com/6VBx3io.png",
                 });
+
+                navigation.replace("home");
             })
             .catch((error) => {
                 var errorCode = error.code;
                 var errorMessage = error.message;
                 alert(errorMessage);
+
+                console.log(errorCode);
             });
     };
 
@@ -88,7 +90,7 @@ const RegisterScreen = ({ navigation }) => {
                         setRegisterDetails({ ...registerDetails, profilePicUrl: text })
                     }
                     value={registerDetails.profilePicUrl}
-                    onSubmitEditing={register}
+                    // onSubmitEditing={register}
                 />
             </View>
             <TouchableOpacity style={styles.button} onPress={register}>

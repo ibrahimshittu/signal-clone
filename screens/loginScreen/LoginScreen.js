@@ -11,6 +11,7 @@ import React, { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import styles from "./LoginScreen.style";
 import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
 const LoginScreen = ({ navigation }) => {
     const [loginDetails, setLoginDetails] = useState({
@@ -18,12 +19,11 @@ const LoginScreen = ({ navigation }) => {
         password: "",
     });
 
-    const auth = getAuth();
-
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 // const uid = user.uid;
+                console.log(user);
                 navigation.replace("home");
             }
         });
@@ -35,8 +35,8 @@ const LoginScreen = ({ navigation }) => {
         signInWithEmailAndPassword(auth, loginDetails.email, loginDetails.password)
             .then((userCredential) => {
                 const user = userCredential.user;
-
                 console.log(user);
+                navigation.replace("home");
             })
             .catch((error) => {
                 const errorCode = error.code;

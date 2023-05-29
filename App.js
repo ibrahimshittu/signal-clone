@@ -2,6 +2,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 import LoginScreen from "./screens/loginScreen/LoginScreen";
 import RegisterScreen from "./screens/registerScreen/RegisterScreen";
+import HomeScreen from "./screens/homeScreen/HomeScreen";
 
 const Stack = createNativeStackNavigator();
 
@@ -28,6 +29,13 @@ export default function App() {
                     options={{
                         title: "Create a new account",
                         headerBackTitle: "Back to Login",
+                    }}
+                />
+                <Stack.Screen
+                    name="home"
+                    component={HomeScreen}
+                    options={{
+                        handleBackVisible: false,
                     }}
                 />
             </Stack.Navigator>
