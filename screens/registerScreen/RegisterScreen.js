@@ -27,7 +27,7 @@ const RegisterScreen = ({ navigation }) => {
                 var user = userCredential.user;
                 user.updateProfile({
                     displayName: registerDetails.fullName,
-                    photoURL: registerDetails.profilePicUrl || "https://i.imgur.com/6VBx3io.png",
+                    photoURL: registerDetails.profilePicUrl ?? "https://i.imgur.com/6VBx3io.png",
                 });
 
                 navigation.replace("home");
