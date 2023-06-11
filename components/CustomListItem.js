@@ -3,15 +3,15 @@ import { ListItem, Avatar } from "@rneui/themed";
 
 const CustomListItem = ({ id, chatName, enterChat }) => {
     return (
-        <ListItem>
+        <ListItem key={id} bottomDivider>
             <Avatar
                 rounded
                 source={{
-                    uri: "https://i.imgur.com/6VBx3io.png",
+                    uri: "https://cdn.pixabay.com/photo/2016/08/08/09/17/avatar-1577909_960_720.png",
                 }}
             />
             <ListItem.Content>
-                <ListItem.Title style={{ fontWeight: 800 }}>Chat One</ListItem.Title>
+                <ListItem.Title style={{ fontWeight: 800 }}>{chatName}</ListItem.Title>
                 <ListItem.Subtitle numberOfLines={1} ellipsizeMode="tail">
                     lorem ipsum bibiugwcvduiohidcyfguigtulfdfffgughiouhgiouh
                 </ListItem.Subtitle>

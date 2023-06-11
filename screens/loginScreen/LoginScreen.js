@@ -23,13 +23,16 @@ const LoginScreen = ({ navigation }) => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
             if (user) {
                 // const uid = user.uid;
-                console.log(user);
-                navigation.replace("home");
+                console.log("logged in user", user);
+                console.log("user is logged in");
+
+                // move to home screen
+                navigation.navigate("home");
             }
         });
 
         return unsubscribe;
-    }, []);
+    }, [navigation]);
 
     const login = () => {
         signInWithEmailAndPassword(auth, loginDetails.email, loginDetails.password)
